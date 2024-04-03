@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundFollow : MonoBehaviour
-{
-    private Vector3 offset = new Vector3(0f, 5f, -10f);
-    private float smoothTime = 0.25f;
-    private Vector3 velocity = Vector3.zero;
+public class BackgroundFollow : MonoBehaviour {
 
-    [SerializeField] private Transform target;
+    private float camerax;
+    private float cameray;
 
-    private void Update()
-    {
-        Vector3 targetPosition = target.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-    }
+    // Use this for initialization
+    void Start () {
+        
+	}
+	
+	// Update is called once per frame
+	void LateUpdate () {
+        camerax = Camera.main.transform.position.x;
+        cameray = Camera.main.transform.position.y;
+        transform.position = new Vector3(camerax, cameray-1f, transform.position.z);
+	}
 }
